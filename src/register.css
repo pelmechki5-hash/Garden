@@ -1,0 +1,57 @@
+.register-page {
+  min-height: 100vh;
+  padding: 48px 24px;
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) minmax(320px, 480px);
+  place-content: center;
+  gap: 70px;
+  color: #dfe8e3;
+  background: #101816;
+}
+.register-page__decoration {
+  min-height: 520px;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #abc0b4;
+  background: linear-gradient(145deg, #21352e, #121b18);
+  border: 1px solid #35483f;
+}
+.register-page__decoration span { font-size: 12px; letter-spacing: .22em; }
+.register-page__decoration strong { color: #4e665b; font-size: 150px; line-height: .8; }
+.register-card { padding: 48px; background: #f5f3ed; color: #17261f; }
+.register-card__label { margin: 0 0 20px; color: #658071; font-size: 11px; font-weight: 700; letter-spacing: .16em; }
+.register-card h1 { margin: 0 0 12px; font-size: 38px; letter-spacing: -.04em; }
+.register-card__intro { margin: 0 0 30px; color: #68756e; line-height: 1.6; }
+.register-form { display: grid; gap: 18px; }
+.register-form label { display: grid; gap: 8px; font-size: 13px; font-weight: 700; }
+.register-form input {
+  width: 100%;
+  padding: 13px 14px;
+  color: #17261f;
+  background: #fff;
+  border: 1px solid #ccd3ce;
+  border-radius: 4px;
+  font: inherit;
+}
+.register-form input:focus { outline: 2px solid #688b78; outline-offset: 1px; }
+.register-form button {
+  margin-top: 4px;
+  padding: 14px;
+  color: white;
+  background: #315f49;
+  border: 0;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.register-form button:disabled { cursor: wait; opacity: .65; }
+.register-message { margin: 0; color: #9c493e; font-size: 13px; line-height: 1.5; }
+.register-message--success { color: #34704f; }
+.register-card__back { display: inline-block; margin-top: 26px; color: #607168; font-size: 13px; }
+
+@media (max-width: 760px) {
+  .register-page { grid-template-columns: minmax(0, 480px); padding: 20px; }
+  .register-page__decoration { display: none; }
+  .register-card { padding: 34px 24px; }
+}

@@ -1,0 +1,33 @@
+name: debt-reminders
+
+on:
+  schedule:
+    - cron: "35 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+      CRON_SECRET: ${{ secrets.DEBT_REMINDER_CRON_SECRET }}
+    steps:
+      - name: Send reminders
+        run: |
+          set -euo pipefail
+          test -n "$SUPABASE_URL"
+          test -n "$SUPABASE_ANON_KEY"
+          test -n "$CRON_SECRET"
+          curl --silent --show-error --fail-with-body \
+            --retry 3 --retry-all-errors \
+            --request POST \
+            "${SUPABASE_URL%/}/functions/v1/debt-reminders" \
+            --header "apikey: $SUPABASE_ANON_KEY" \
+            --header "x-cron-secret: $CRON_SECRET" \
+            --header "Content-Type: application/json" \
+            --data '{}'
