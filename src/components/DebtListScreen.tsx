@@ -13,10 +13,11 @@ import { DebtFilters } from './DebtFilters';
 import { EmptyState } from './EmptyState';
 import { QuickMenu } from './QuickMenu';
 import { useI18n } from '../context/I18nContext';
+import { OnboardingHint } from './OnboardingHint';
 
 export function DebtListScreen({ status }: { status: DebtStatus }) {
   const { debts, loading, error, refresh } = useDebts();
-  const { settings } = useSettings();
+  const { settings, ready: settingsReady } = useSettings();
   const t = useI18n();
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState<DebtSort>('date');
@@ -35,6 +36,8 @@ export function DebtListScreen({ status }: { status: DebtStatus }) {
     (sum, debt) => sum + lateFee(debt.due_at, settings.late_fee_enabled, settings.late_fee_start, settings.late_fee_daily),
     0,
   );
+  const showOnboarding = status === 'active' && settingsReady && !loading
+    && debts.length === 0 && !settings.onboarding_completed;
 
   async function throwAway(debt: (typeof debts)[number]) {
     setBurningId(debt.id);
@@ -65,8 +68,9 @@ export function DebtListScreen({ status }: { status: DebtStatus }) {
       <AppHeader
         title={status === 'active' ? t('debts') : t('history')}
         subtitle={status === 'active' ? t('activeRecords').toUpperCase() : t('returnedDebts').toUpperCase()}
-        action={status === 'active' && <Link className="add-button" href="/new">+</Link>}
+        action={status === 'active' && <Link className={`add-button${showOnboarding ? ' onboarding-target' : ''}`} href="/new">+</Link>}
       />
+      {showOnboarding && <OnboardingHint />}
       {status === 'active' && (
         <section className="dashboard-hero">
           <div>

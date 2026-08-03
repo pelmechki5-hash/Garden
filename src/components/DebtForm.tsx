@@ -13,7 +13,7 @@ const today = new Date().toISOString().slice(0, 10);
 
 export function DebtForm({ debt, onSaved }: { debt?: Debt; onSaved: () => Promise<void> }) {
   const [, navigate] = useLocation();
-  const { settings } = useSettings();
+  const { settings, updateSettings } = useSettings();
   const t = useI18n();
   const defaultDueDate = new Date(Date.now() + settings.default_due_days * 86_400_000).toISOString().slice(0, 10);
   const [loanType, setLoanType] = useState<'money' | 'item'>(debt?.amount === null ? 'item' : 'money');
@@ -85,6 +85,7 @@ export function DebtForm({ debt, onSaved }: { debt?: Debt; onSaved: () => Promis
 
     try {
       await onSaved();
+      if (!settings.onboarding_completed) await updateSettings({ onboarding_completed: true }).catch(() => undefined);
       navigate(`/debt/${saved.id}`);
     } catch (refreshError) {
       setError(`${t('refreshError')}: ${readableDebtError(refreshError)}`);

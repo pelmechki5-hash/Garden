@@ -17,6 +17,7 @@ import { BlacklistPage } from './pages/BlacklistPage';
 import { OverduePage } from './pages/OverduePage';
 import { StatsPage } from './pages/StatsPage';
 import { CalendarPage } from './pages/CalendarPage';
+import { AiChatPage } from './pages/AiChatPage';
 
 export default function App() {
   const [session, setSession] = useState<Session | null>(null);
@@ -53,6 +54,7 @@ export default function App() {
               <Route path="/overdue" component={OverduePage} />
               <Route path="/stats" component={StatsPage} />
               <Route path="/calendar" component={CalendarPage} />
+              <Route path="/ai" component={AiChatPage} />
               <Route component={NotFoundPage} />
             </Switch>
           </DebtsProvider>

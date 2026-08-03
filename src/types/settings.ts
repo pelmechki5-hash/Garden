@@ -6,6 +6,8 @@ export interface UserSettings {
   late_fee_daily: number;
   default_currency: string;
   default_due_days: number;
+  ai_persona: 'seal' | 'human';
+  onboarding_completed: boolean;
 }
 
 export type LanguageCode = 'ru' | 'kk' | 'en' | 'tr' | 'uz' | 'ky' | 'zh' | 'de' | 'fr' | 'es';
@@ -18,4 +20,6 @@ export const defaultSettings: UserSettings = {
   late_fee_daily: 0.5,
   default_currency: 'KZT',
   default_due_days: 7,
+  ai_persona: 'seal',
+  onboarding_completed: false,
 };

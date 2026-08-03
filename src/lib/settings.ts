@@ -6,7 +6,7 @@ export async function loadSettings() {
   if (!userData.user) throw new Error('Пользователь не найден');
   const { data, error } = await supabase
     .from('user_settings')
-    .select('language, large_text, late_fee_enabled, late_fee_start, late_fee_daily, default_currency, default_due_days')
+    .select('language, large_text, late_fee_enabled, late_fee_start, late_fee_daily, default_currency, default_due_days, ai_persona, onboarding_completed')
     .eq('user_id', userData.user.id)
     .maybeSingle();
   if (error) throw error;
@@ -15,7 +15,7 @@ export async function loadSettings() {
   const { data: created, error: createError } = await supabase
     .from('user_settings')
     .insert({ user_id: userData.user.id, ...defaultSettings })
-    .select('language, large_text, late_fee_enabled, late_fee_start, late_fee_daily, default_currency, default_due_days')
+    .select('language, large_text, late_fee_enabled, late_fee_start, late_fee_daily, default_currency, default_due_days, ai_persona, onboarding_completed')
     .single();
   if (createError) throw createError;
   return created as UserSettings;

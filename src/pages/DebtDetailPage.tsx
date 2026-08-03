@@ -18,17 +18,17 @@ export function DebtDetailPage({ params }: { params: { id: string } }) {
   const [canUndo, setCanUndo] = useState(false);
   const debt = debts.find((item) => item.id === params.id);
 
-  if (loading) return <main className="app-shell"><p className="screen-message">{t('recordLoading')}</p></main>;
-  if (!debt) return <main className="app-shell"><AppHeader title={t('debtNotFound')} backHref="/" /></main>;
-  const fee = debt.status === 'active'
-    ? lateFee(debt.due_at, settings.late_fee_enabled, settings.late_fee_start, settings.late_fee_daily)
-    : 0;
-
   useEffect(() => {
     if (!canUndo) return;
     const timer = window.setTimeout(() => setCanUndo(false), 7000);
     return () => window.clearTimeout(timer);
   }, [canUndo]);
+
+  if (loading) return <main className="app-shell"><p className="screen-message">{t('recordLoading')}</p></main>;
+  if (!debt) return <main className="app-shell"><AppHeader title={t('debtNotFound')} backHref="/" /></main>;
+  const fee = debt.status === 'active'
+    ? lateFee(debt.due_at, settings.late_fee_enabled, settings.late_fee_start, settings.late_fee_daily)
+    : 0;
 
   async function markReturned() {
     try {

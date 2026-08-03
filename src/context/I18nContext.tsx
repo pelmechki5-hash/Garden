@@ -8,7 +8,10 @@ const I18nContext = createContext<Translate>((key) => key);
 export function I18nProvider({ children }: { children: ReactNode }) {
   const { settings } = useSettings();
   const t: Translate = (key, values) => {
-    let text = translations[settings.language][key];
+    let text = translations[settings.language][key]
+      ?? translations.en[key]
+      ?? translations.ru[key]
+      ?? key;
     for (const [name, value] of Object.entries(values ?? {})) {
       text = text.replace(`{${name}}`, String(value));
     }

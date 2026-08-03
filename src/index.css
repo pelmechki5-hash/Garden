@@ -4,6 +4,7 @@
 @import './styles/forms.css';
 @import './styles/auth.css';
 @import './styles/features.css';
+@import './styles/chat.css';
 
 :root {
   font-family: Inter, system-ui, sans-serif;

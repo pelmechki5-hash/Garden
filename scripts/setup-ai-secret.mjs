@@ -19,15 +19,17 @@ function readValue(source, name) {
   return line.slice(line.indexOf('=') + 1).trim().replace(/^(['"])(.*)\1$/, '$2');
 }
 
-let source;
-try {
-  source = await readFile('.env', 'utf8');
-} catch {
-  fail('.env is missing');
+const sources = [];
+for (const file of ['.env.local', '.env']) {
+  try {
+    sources.push(await readFile(file, 'utf8'));
+  } catch {
+    // The project may use either Vite's .env.local or the shared .env file.
+  }
 }
 
-const apiKey = readValue(source, 'GEMINI_API_KEY');
-if (!apiKey) fail('GEMINI_API_KEY is missing in .env');
+const apiKey = sources.map((source) => readValue(source, 'GEMINI_API_KEY')).find(Boolean);
+if (!apiKey) fail('GEMINI_API_KEY is missing in .env.local or .env');
 
 const tempDirectory = await mkdtemp(join(tmpdir(), 'nfact-ai-secret-'));
 const secretFile = join(tempDirectory, 'gemini.env');

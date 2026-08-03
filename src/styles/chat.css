@@ -1,0 +1,50 @@
+.ai-chat-page { position: relative; padding-bottom: 180px; }
+.persona-picker { margin: 14px 0 0; padding: 4px; display: grid; grid-template-columns: 1fr 1fr; gap: 5px; background: var(--surface-soft); border: 1px solid var(--line); border-radius: 16px; }
+.persona-picker button { padding: 8px 10px; display: flex; align-items: center; justify-content: center; gap: 7px; color: var(--muted); background: transparent; border: 0; border-radius: 12px; font-size: 11px; font-weight: 700; }
+.persona-picker button.active { color: var(--accent); background: var(--surface); box-shadow: 0 5px 14px #35245d16; }
+.persona-picker img { width: 28px; height: 28px; object-fit: cover; border-radius: 9px; }
+.ai-profile { position: relative; margin: 18px 0 12px; padding: 18px; display: flex; align-items: center; gap: 14px; overflow: hidden; background: linear-gradient(125deg, #302659, #7057c9 58%, #9b83eb); border-radius: 24px; box-shadow: 0 18px 40px #3f2f7a38; }
+.ai-profile__glow { position: absolute; width: 160px; height: 160px; right: 18%; top: -90px; background: #fff4; border-radius: 50%; filter: blur(5px); }
+.ai-profile img { position: relative; width: 68px; height: 68px; object-fit: cover; border: 3px solid white; border-radius: 22px; box-shadow: 0 10px 26px #17102c55; transform: rotate(-2deg); }
+.ai-profile__identity { position: relative; display: grid; gap: 4px; }
+.ai-profile__identity small { color: #e6ddff; font-size: 8px; font-weight: 800; letter-spacing: 1.4px; }
+.ai-profile__identity strong { color: white; font-size: 17px; }
+.ai-profile span { color: #f0ebff; font-size: 11px; }
+.ai-profile span i { width: 7px; height: 7px; display: inline-block; background: #43bf87; border-radius: 50%; box-shadow: 0 0 0 3px #43bf8722; }
+.ai-profile__waves { position: absolute; right: 18px; bottom: 18px; display: flex; align-items: end; gap: 3px; }
+.ai-profile__waves b { width: 3px; height: 10px; background: #fff9; border-radius: 3px; animation: seal-wave .8s ease-in-out infinite alternate; }
+.ai-profile__waves b:nth-child(2) { height: 19px; animation-delay: .2s; }
+.ai-profile__waves b:nth-child(3) { height: 14px; animation-delay: .4s; }
+.chat-panel { min-height: 330px; padding: 14px 12px 20px; background: radial-gradient(circle at 15px 15px, color-mix(in srgb, var(--accent) 7%, transparent) 2px, transparent 2px), color-mix(in srgb, var(--surface) 75%, transparent); background-size: 28px 28px; border: 1px solid var(--line); border-radius: 24px; box-shadow: inset 0 1px #fff5; }
+.chat-day { margin: 0 0 14px; display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+.chat-day::before, .chat-day::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.chat-messages { display: grid; gap: 12px; }
+.chat-message { display: flex; align-items: flex-end; gap: 8px; animation: chat-in .25s ease; }
+.chat-message img { width: 34px; height: 34px; flex: 0 0 auto; object-fit: cover; border: 2px solid white; border-radius: 50%; box-shadow: 0 5px 12px #35245d22; }
+.chat-bubble { max-width: min(82%, 520px); }
+.chat-author { display: block; margin: 0 0 4px 8px; color: var(--accent); font-size: 9px; font-weight: 800; }
+.chat-message p { margin: 0; padding: 12px 14px; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 17px 17px 17px 5px; box-shadow: var(--shadow); font-size: 13px; line-height: 1.55; white-space: pre-wrap; }
+.chat-message--user { justify-content: flex-end; }
+.chat-message--user .chat-bubble { display: flex; justify-content: flex-end; }
+.chat-message--user p { color: white; background: linear-gradient(145deg, var(--accent), #856be7); border: 0; border-radius: 17px 17px 5px 17px; }
+.speak-button { margin: 6px 0 0 5px; padding: 6px 9px; display: inline-flex; align-items: center; gap: 5px; color: var(--muted); background: transparent; border: 0; border-radius: 10px; font-size: 10px; font-weight: 700; }
+.speak-button:hover { color: var(--accent); background: var(--accent-soft); }
+.speak-button--active { color: var(--accent); background: var(--accent-soft); animation: typing-pulse .7s infinite alternate; }
+.typing { color: var(--accent) !important; letter-spacing: 4px; animation: typing-pulse 1s infinite alternate; }
+.chat-suggestions { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+.chat-suggestions button { padding: 10px 12px; color: var(--accent); background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 22%, transparent); border-radius: 13px; font-size: 11px; }
+.chat-input { position: fixed; z-index: 12; right: 0; bottom: 91px; left: 0; width: min(calc(100% - 30px), 720px); margin: auto; padding: 8px; display: grid; grid-template-columns: 1fr 42px 46px; gap: 6px; background: color-mix(in srgb, var(--surface) 94%, transparent); border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 15px 45px #35245d28; backdrop-filter: blur(16px); }
+.chat-input textarea { max-height: 100px; padding: 12px; resize: none; color: var(--text); background: transparent; border: 0; outline: 0; }
+.chat-input button { width: 46px; height: 46px; align-self: end; color: white; background: var(--accent); border: 0; border-radius: 14px; font-size: 21px; font-weight: 800; }
+.chat-input button:disabled { opacity: .4; }
+.chat-input .voice-input { width: 42px; color: var(--accent); background: var(--accent-soft); font-size: 18px; }
+.chat-input .voice-input--active { color: #fff; background: var(--danger); box-shadow: 0 0 0 5px color-mix(in srgb, var(--danger) 20%, transparent); animation: mic-pulse .8s infinite alternate; }
+.voice-error { position: fixed; z-index: 13; right: 20px; bottom: 153px; left: 20px; width: min(calc(100% - 40px), 680px); margin: auto; padding: 9px 12px; color: #fff; background: var(--danger); border-radius: 11px; box-shadow: 0 8px 20px #9e2d3b38; font-size: 10px; text-align: center; }
+@keyframes chat-in { from { opacity: 0; transform: translateY(5px); } }
+@keyframes typing-pulse { to { opacity: .35; } }
+@keyframes seal-wave { to { height: 5px; opacity: .45; } }
+@keyframes mic-pulse { to { transform: scale(.92); } }
+
+@media (min-width: 760px) {
+  .chat-input { bottom: 115px; }
+}
